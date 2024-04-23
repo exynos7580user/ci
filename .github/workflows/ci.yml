@@ -12,32 +12,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: Cleanup
-      uses: rokibhasansagar/slimhub_actions@main
-      
-    - name: Installing Build Dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install bc axel bison build-essential ccache curl flex g++-multilib gcc-multilib python python2 git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev
-        sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
-        python -V
-    - name: Installing OpenJDK 7
-      run: |
-        axel -q -n $(nproc --all) https://download.java.net/openjdk/jdk7u75/ri/openjdk-7u75-b13-linux-x64-18_dec_2014.tar.gz
-        sudo mkdir -p /usr/local/java
-        sudo cp -r openjdk-7u75-b13-linux-x64-18_dec_2014.tar.gz /usr/local/java/
-        cd /usr/local/java
-        sudo tar xvzf openjdk-7u75-b13-linux-x64-18_dec_2014.tar.gz 
-        export JAVA_HOME=/usr/local/java/java-se-7u75-ri/
-        export JRE_HOME=/usr/local/java/java-se-7u75-ri/
-        export PATH=$PATH:/usr/local/java/java-se-7u75-ri/bin:/usr/local/java/java-se-7u75-ri/bin
-        sudo update-alternatives --install "/usr/bin/java" "java" "/usr/local/java/java-se-7u75-ri/bin/java" 1
-        sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/local/java/java-se-7u75-ri/bin/javac" 1
-        sudo update-alternatives --install "/usr/bin/jar" "jar" "/usr/local/java/java-se-7u75-ri/bin/jar" 1
-        sudo update-alternatives --set java /usr/local/java/java-se-7u75-ri/bin/java
-        sudo update-alternatives --set javac /usr/local/java/java-se-7u75-ri/bin/javac
-        sudo update-alternatives --set jar /usr/local/java/java-se-7u75-ri/bin/jar
-        java -version
     - name: Set up SSH
       uses: fastai/workflows/ssh@master
       with:
