@@ -24,11 +24,5 @@ jobs:
     - name: Configure Git
       run: git config --global user.name "NotNoelChannel" && git config --global user.email notnoel12345678@gmail.com
 
-    - name: Setup Android Build Environment
-      run: |
-          git clone https://github.com/akhilnarang/scripts
-          cd scripts/setup
-          bash android_build_env.sh
-
     - name: Setup Debug Session
       uses: mxschmitt/action-tmate@master
